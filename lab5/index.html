@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script>
+      /* runs test to see if expected argument is === to value returned by function2test argument */
+      function myFunctionTest(expected, function2test) {
+        if (expected === function2test()) {
+          return "TEST SUCCEEDED";
+        } else {
+          return (
+            "TEST FAILED.  Expected " + expected + " found " + function2test()
+          );
+        }
+      }
+
+      /* max returns the maximum of 2 arguments */
+      function max(a, b) {
+        if (a > b) {
+          return a;
+        } else {
+          return b;
+        }
+      }
+
+      /* max3 takes 3 numbers as arguments and returns the largest */
+      function maxOfThree(a, b, c) {
+        return max(max(a, b), c);
+      }
+
+      /* isVowel takes 1 char as arguments and returns true if it is a vowel */
+      function isVowel(char) {
+        char = char.toLowerCase();
+        const vowels = ["a", "e", "i", "o", "u"];
+        return vowels.includes(char);
+      }
+
+      /* sum takes num arrays as arguments and returns sum of them */
+      function sum(numArray) {
+        return numArray.reduce((a, b) => a + b, 0);
+      }
+
+      /* multiplies takes num arrays as arguments and returns multiply of them */
+      function multiplies(numArray) {
+        return numArray.reduce((a, b) => a * b, 0);
+      }
+
+      /* reverse takes a string as arguments and returns reverse of it */
+      function reverse(str) {
+        return str.split("").reverse().join("");
+      }
+
+      /* findLongestWord takes a string as arguments and returns longest word in it */
+      function findLongestWord(str) {
+        return str.split(" ").reduce((a, b) => (a.length > b.length ? a : b));
+      }
+
+      /* filterLongWords takes a string and an integer as arguments and returns words longer than integer */
+      function filterLongWords(str, i) {
+        return str.split(" ").filter((word) => word.length > i);
+      }
+
+      console.log(
+        "Expected output of max(20,10) is 20  " +
+          myFunctionTest(20, function () {
+            return max(20, 10);
+          })
+      );
+      console.log(
+        "Expected output of maxOfThree(5,4,44) is 44  " +
+          myFunctionTest(44, function () {
+            return maxOfThree(5, 4, 44);
+          })
+      );
+
+      console.log(
+        "Expected output of isVowel('a') is true  " +
+          myFunctionTest(true, function () {
+            return isVowel("a");
+          })
+      );
+
+      console.log(
+        "Expected output of sum([1,2,3,4]) is 10  " +
+          myFunctionTest(10, function () {
+            return sum([1, 2, 3, 4]);
+          })
+      );
+
+      console.log(
+        "Expected output of multiplies([1,2,3,4]) is 24  " +
+          myFunctionTest(24, function () {
+            return multiplies([1, 2, 3, 4]);
+          })
+      );
+
+      console.log(
+        "Expected output of reverse('hello') is 'olleh'  " +
+          myFunctionTest("olleh", function () {
+            return reverse("hello");
+          })
+      );
+
+      console.log(
+        "Expected output of findLongestWord('hello world') is 'hello'  " +
+          myFunctionTest("hello", function () {
+            return findLongestWord("hello world");
+          })
+      );
+
+      console.log(
+        "Expected output of filterLongWords('hello world', 4) is ['hello', 'world']  " +
+          myFunctionTest(["hello", "world"], function () {
+            return filterLongWords("hello world", 4);
+          })
+      );
+    </script>
+  </head>
+  <body>
+    Look in the Chrome developer console to see the output. CTRL_SHIFT_J
+  </body>
+</html>
