@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script>
+      String.prototype.filter = function (bannedWords) {
+        let str = this.toString();
+        // Iterate through each banned word
+        for (let bannedWord of bannedWords) {
+          // Replace each banned word with an empty string
+          str = str.replace(new RegExp("\\b" + bannedWord + "\\b", "gi"), "");
+          // '\\b' ensures whole word match, 'gi' for global, case-insensitive match
+        }
+
+        // Remove extra spaces resulting from multiple removals
+        str = str.replace(/\s+/g, " ").trim();
+
+        return str;
+      };
+
+      Array.prototype.bubbleSort = function () {
+        let arr = this;
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+              // swap arr[j+1] and arr[i]
+              let temp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = temp;
+            }
+          }
+        }
+        return arr;
+      };
+
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+
+        this.greeting = function () {
+          console.log(
+            `Greetings, my name is ${this.name} and I am ${this.age} years old.`
+          );
+        };
+
+        this.salute = function () {
+          console.log(
+            `Good morning!, and in case I don't see you, good afternoon, good evening and good night!`
+          );
+        };
+      }
+
+      function Student(name, age, major) {
+        Person.call(this, name, age);
+        this.major = major;
+
+        this.greeting = function () {
+          console.log(
+            `Hey, my name is ${this.name} and I am studying ${this.major}.`
+          );
+        };
+
+        this.salute = function () {
+          console.log(
+            `Good morning!, and in case I don't see you, good afternoon, good evening and good night!`
+          );
+        };
+      }
+
+      function Professor(name, age, department) {
+        Person.call(this, name, age); // Call Person constructor with Professor's 'this' context
+        this.department = department;
+
+        this.greeting = function () {
+          console.log(
+            `Good day, my name is ${this.name} and I am in the ${this.department} department.`
+          );
+        };
+
+        this.salute = function () {
+          console.log(
+            `Good morning!, and in case I don't see you, good afternoon, good evening and good night!`
+          );
+        };
+      }
+
+      // output
+      console.log("This house is not nice!".filter("not"));
+      console.log([6, 4, 0, 3, -2, 1].bubbleSort());
+      let student = new Student("Alice", 20, "Computer Science");
+      let professor = new Professor("Dr. Smith", 45, "Physics");
+      student.greeting();
+      student.salute();
+
+      professor.greeting();
+      professor.salute();
+    </script>
+  </head>
+  <body>
+    Look in the Chrome developer console to see the output. CTRL_SHIFT_J
+  </body>
+</html>
